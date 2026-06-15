@@ -26,6 +26,11 @@ class NotAuthenticatedError(AppError):
     code = "not_authenticated"
 
 
+class AccountRequiredError(AppError):
+    status_code = 403
+    code = "account_required"
+
+
 def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def handle_app_error(

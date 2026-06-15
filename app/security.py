@@ -15,11 +15,18 @@ def verify_password(password: str, password_hash: str) -> bool:
     return bcrypt.checkpw(password.encode(), password_hash.encode())
 
 
-def create_access_token(user_id: str, login: str) -> str:
+def create_access_token(
+    user_id: str, login: str, premium: bool = False
+) -> str:
     expire = datetime.now(timezone.utc) + timedelta(
         minutes=settings.jwt_expire_minutes
     )
-    payload = {"sub": user_id, "login": login, "exp": expire}
+    payload = {
+        "sub": user_id,
+        "login": login,
+        "premium": premium,
+        "exp": expire,
+    }
     return jwt.encode(
         payload, settings.jwt_secret, algorithm=settings.jwt_algorithm
     )

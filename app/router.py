@@ -41,3 +41,11 @@ async def me(
     user: UserResponse = Depends(get_current_user),
 ) -> UserResponse:
     return user
+
+
+@router.post("/upgrade", response_model=TokenResponse)
+async def upgrade(
+    user: UserResponse = Depends(get_current_user),
+    controller: AuthController = Depends(get_controller),
+) -> TokenResponse:
+    return await controller.upgrade(user.user_id)

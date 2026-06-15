@@ -15,8 +15,10 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user_id: str
     login: str
+    is_premium: bool = False
 
 
 class UserResponse(BaseModel):
     user_id: str
     login: str
+    is_premium: bool = False

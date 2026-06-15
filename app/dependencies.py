@@ -33,5 +33,7 @@ def get_current_user(
     except jwt.PyJWTError:
         raise NotAuthenticatedError()
     return UserResponse(
-        user_id=payload["sub"], login=payload["login"]
+        user_id=payload["sub"],
+        login=payload["login"],
+        is_premium=payload.get("premium", False),
     )
